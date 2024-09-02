@@ -38,7 +38,8 @@ export const topProductsColumns: ColumnDef<TopProducts>[] = [
   ];
 
 async function getTopProducts(): Promise<TopProducts[]> {
-  const res = await fetch("http://localhost:3000/api/products", { cache: "no-store" });
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${apiUrl}/api/products`, { cache: "no-store" });
   const data = await res.json();
   return data;
 }

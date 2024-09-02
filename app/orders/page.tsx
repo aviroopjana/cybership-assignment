@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { columns, Orders } from "./columns";
 
 async function getOrders(): Promise<Orders[]> {
-  const res = await fetch("http://localhost:3000/api/orders", { cache: "no-store" });
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch(`${apiUrl}/api/orders`, { cache: "no-store" });
   const data = await res.json();
   return data;
 }

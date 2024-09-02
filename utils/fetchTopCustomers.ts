@@ -2,7 +2,8 @@ import { Customers } from "@/components/dashboard/top-customers";
 import { Customer } from "@prisma/client";
 
 export async function fetchTopCustomers(): Promise<Customers[]> {
-  const res = await fetch("http://localhost:3000/api/top-customers", {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const res = await fetch("`${apiUrl}/api/top-customers`", {
     cache: "no-store",
   });
   const data = await res.json();
