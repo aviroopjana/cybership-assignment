@@ -3,7 +3,7 @@ import { Customer } from "@prisma/client";
 
 export async function fetchTopCustomers(): Promise<Customers[]> {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch("`${apiUrl}/api/top-customers`", {
+  const res = await fetch(`${apiUrl}/api/top-customers`, {
     cache: "no-store",
   });
   const data = await res.json();
