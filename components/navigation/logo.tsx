@@ -24,7 +24,7 @@ export default function Logo() {
             transition={{ duration: 0.3 }}
             className="text-xl font-semibold max-md:hidden whitespace-nowrap"
           >
-            Cybership Dashboard
+            Cybership Order Tracker
           </motion.h1>
         )}
       </AnimatePresence>

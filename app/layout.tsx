@@ -12,7 +12,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Cybership Dashboard",
+  title: "Cybership Order Tracker",
   description: "An assignment by Aviroop Jana",
 };
 
