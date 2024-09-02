@@ -17,6 +17,8 @@ export type Orders = {
   totalAmount: number;
   shippedAt: string;
   deliveredAt: string;
+  orderStatus: string;
+  paymentStatus: string;
 };
 
 export const columns: ColumnDef<Orders>[] = [
@@ -29,7 +31,7 @@ export const columns: ColumnDef<Orders>[] = [
     header: "Total Amount",
     cell: ({ row }) => {
       const totalAmount = row.getValue("totalAmount") as number;
-      return <>{totalAmount}</>;
+      return <>${totalAmount}</>;
     },
   },
   {
@@ -46,6 +48,22 @@ export const columns: ColumnDef<Orders>[] = [
     cell: ({ row }) => {
       const deliveredAt = row.getValue("deliveredAt") as string;
       return <span>{deliveredAt}</span>;
+    },
+  },
+  {
+    accessorKey: "orderStatus",
+    header: "Order Status",
+    cell: ({ row }) => {
+      const orderStatus = row.getValue("orderStatus") as string;
+      return <span>{orderStatus}</span>;
+    },
+  },
+  {
+    accessorKey: "paymentStatus",
+    header: "Payment Status",
+    cell: ({ row }) => {
+      const paymentStatus = row.getValue("paymentStatus") as string;
+      return <span>{paymentStatus}</span>;
     },
   },
   {
