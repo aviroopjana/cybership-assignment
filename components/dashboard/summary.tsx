@@ -18,6 +18,7 @@ interface SummaryCardProps {
   icon: LucideIcon;
   change: string;
   changeType: string;
+  isLoading?: boolean;
 }
 
 const SummaryCard: React.FC<SummaryCardProps> = ({
@@ -26,32 +27,42 @@ const SummaryCard: React.FC<SummaryCardProps> = ({
   icon: Icon,
   change,
   changeType,
+  isLoading,
 }) => {
   return (
     <div className="p-6 rounded-md flex-auto dark:bg-tertiary bg-slate-100 border">
       <div className="flex items-center gap-5 justify-center max-md:justify-between">
         <div>
           <p>{title}</p>
-          <h2 className="font-bold text-2xl">{value}</h2>
+          <h2 className="font-bold text-2xl">
+            {isLoading ? (
+              <div className="animate-pulse bg-gray-300 h-6 w-24 rounded"></div>
+            ) : (
+              value
+            )}
+          </h2>
         </div>
         <div>
-          <Icon
-            className="bg-primary text-white p-3 rounded-full"
-            size={50}
-          />
+          {isLoading ? (
+            <div className="animate-pulse bg-gray-300 h-12 w-12 rounded-full"></div>
+          ) : (
+            <Icon className="bg-primary text-white p-3 rounded-full" size={50} />
+          )}
         </div>
       </div>
       <div
-        className={`flex gap-1 mt-2 md:justify-center
-        ${changeType === "increase" ? "text-green-500" : "text-red-500"}
-        `}
+        className={`flex gap-1 mt-2 md:justify-center ${
+          changeType === "increase" ? "text-green-500" : "text-red-500"
+        }`}
       >
-        {changeType === "increase" ? (
+        {isLoading ? (
+          <div className="animate-pulse bg-gray-300 h-4 w-16 rounded"></div>
+        ) : changeType === "increase" ? (
           <ArrowUp size={20} />
         ) : (
           <ArrowDown size={20} />
         )}
-        <span className="text-sm">{change}</span>
+        {!isLoading && <span className="text-sm">{change}</span>}
       </div>
     </div>
   );
@@ -65,6 +76,7 @@ const Summary = () => {
       icon: Package,
       change: "+30% since last year",
       changeType: "increase",
+      isLoading: true,
     },
     {
       title: "Revenue",
@@ -72,6 +84,7 @@ const Summary = () => {
       icon: DollarSign,
       change: "-80% since last year",
       changeType: "decrease",
+      isLoading: true,
     },
     {
       title: "Customers",
@@ -79,6 +92,7 @@ const Summary = () => {
       icon: Users,
       change: "+10% since last year",
       changeType: "increase",
+      isLoading: true,
     },
     {
       title: "Products",
@@ -86,6 +100,7 @@ const Summary = () => {
       icon: Shirt,
       change: "-11% since last year",
       changeType: "decrease",
+      isLoading: true,
     },
   ]);
 
@@ -100,6 +115,7 @@ const Summary = () => {
             icon: Package,
             change: "+30% since last year",
             changeType: "increase",
+            isLoading: false,
           },
           {
             title: "Revenue",
@@ -107,6 +123,7 @@ const Summary = () => {
             icon: DollarSign,
             change: "-80% since last year",
             changeType: "decrease",
+            isLoading: false,
           },
           {
             title: "Customers",
@@ -114,6 +131,7 @@ const Summary = () => {
             icon: Users,
             change: "+10% since last year",
             changeType: "increase",
+            isLoading: false,
           },
           {
             title: "Products",
@@ -121,6 +139,7 @@ const Summary = () => {
             icon: Shirt,
             change: "-11% since last year",
             changeType: "decrease",
+            isLoading: false,
           },
         ]);
       } catch (error) {
@@ -133,7 +152,7 @@ const Summary = () => {
 
   return (
     <AnalyticsCard title="Summary" subTitle="2024 Year Summary">
-      <div className="grid xl:grid-cols-4 md:grid-cols-2 gap-10 mb-3">
+      <div className="grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6 p-4">
         {summaryData.map((data, index) => (
           <SummaryCard
             key={index}
@@ -142,6 +161,7 @@ const Summary = () => {
             icon={data.icon}
             change={data.change}
             changeType={data.changeType}
+            isLoading={data.isLoading}
           />
         ))}
       </div>
