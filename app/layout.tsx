@@ -23,15 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-        >
+      <body className={`${poppins.className} h-screen overflow-hidden`}>
+        <ThemeProvider attribute="class" defaultTheme="system">
           <Navbar />
-          <main className="flex">
-            <Sidebar/>
-            <section className="min-h-screen flex-1">
+          <main className="flex h-full">
+            <div className="h-full overflow-hidden">
+              <Sidebar />
+            </div>
+            <section className="flex-1 overflow-auto pb-20">
               {children}
             </section>
           </main>
